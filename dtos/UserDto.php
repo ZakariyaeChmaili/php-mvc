@@ -53,7 +53,7 @@ class UserDto
     public function toEntity(): User
     {
         $user = new User();
-        $user->setId($this->id);
+        isset($this->id) and $user->setId($this->id);
         $user->setFirstName($this->firstName);
         $user->setLastName($this->lastName);
         $user->setAge($this->age);

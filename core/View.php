@@ -3,7 +3,7 @@
 class View
 {
 
-    private string $body, $nav = "";
+    private string $body="", $nav = "";
 
     public function __construct()
     {
@@ -20,6 +20,7 @@ class View
     function redirect(string $view): void
     {
         header("Location:" . ROOT_URL . $view);
+        exit();
     }
 
     public function render(string $element = "body"): string
@@ -60,5 +61,14 @@ class View
     public function includeView(string $viewName): void
     {
         include ROOT_PATH . "/views/" . $viewName . ".php";
+    }
+
+
+    public function getPostData(){
+        return $_POST;
+    }
+
+    public function getGetData(){
+        return $_GET;
     }
 }

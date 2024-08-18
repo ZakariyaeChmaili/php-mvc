@@ -13,11 +13,19 @@ class Repository
 
     protected function fetch($className, $query, $params = []): false|array
     {
-
-        $prepare = $this->db->prepare($query, $params);
+        $prepare = $this->db->prepare($query);
         $prepare->setFetchMode(PDO::FETCH_CLASS, $className);
-        $prepare->execute();
+        $prepare->execute($params);
         return $prepare->fetchAll();
+
+    }
+
+    protected function query($className, $query, $params = []): User|bool
+    {
+        $prepare = $this->db->prepare($query);
+        $prepare->setFetchMode(PDO::FETCH_CLASS, $className);
+        $prepare->execute($params);
+        return $prepare->fetch();
 
     }
 
