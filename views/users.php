@@ -40,11 +40,11 @@
                         <td>
                             <div class="row">
                                 <div class="col col-auto">
-                                    <a href="<?=ROOT_URL.'user/delete?id='.$user->getId()?>"
+                                    <a href="<?=ROOT_URL.'user/delete/'.$user->getId()?>"
                                        class="btn btn-danger">delete</a>
                                 </div>
                                 <div class="col col-auto">
-                                    <a href="<?=ROOT_URL.'user/updateFormUser?id='.$user->getId()?>"
+                                    <a href="<?=ROOT_URL.'user/updateFormUser/'.$user->getId()?>"
                                        class="btn btn-info" >update</a>
                                 </div>
                             </div>

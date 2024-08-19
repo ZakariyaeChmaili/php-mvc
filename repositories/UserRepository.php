@@ -42,7 +42,7 @@ class UserRepository extends Repository
         return $this->query("User",$sql, $params);
     }
 
-    public function updateUser(User $user)
+    public function updateUser(User $user): User|bool
     {
         $sql = "UPDATE users SET first_name = :firstName, last_name = :lastName, age = :age WHERE id = :id";
         $params = [
@@ -53,5 +53,12 @@ class UserRepository extends Repository
         ];
         return $this->query("User", $sql, $params);
     }
+
+
+//    public function getUserByUsernameAndPassword(string $username, string $password): User{
+//
+//        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+//        password_hash()
+//    }
 
 }

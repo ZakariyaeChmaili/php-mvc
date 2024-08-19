@@ -13,8 +13,8 @@ class View
     public function view(string $viewName, $data= null): void
     {
 
-        include ROOT_PATH . "/views/" . $viewName . ".php";
-        include ROOT_PATH . "/template/template.php";
+        include P_ROOT . "/views/" . $viewName . ".php";
+        include P_ROOT . "/template/template.php";
     }
 
     function redirect(string $view): void
@@ -60,15 +60,17 @@ class View
 
     public function includeView(string $viewName): void
     {
-        include ROOT_PATH . "/views/" . $viewName . ".php";
+        include P_ROOT . "/views/" . $viewName . ".php";
     }
 
 
-    public function getPostData(){
+    public function getPostData(): array
+    {
         return $_POST;
     }
 
-    public function getGetData(){
+    public function getGetData(): array
+    {
         return $_GET;
     }
 }

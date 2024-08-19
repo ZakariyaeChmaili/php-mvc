@@ -9,6 +9,7 @@ class MainController extends Controller
 
     }
 
+    #[Route("/home",RequestMethod::GET)]
     function index()
     {
         $this->view->view("home");

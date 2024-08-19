@@ -8,7 +8,7 @@ class Database
 
     private function __construct()
     {
-        $envFile = file(ROOT_PATH . '/.env');
+        $envFile = file(P_ROOT . '/.env');
         $env = [];
         foreach ($envFile as $line) {
             $keyValue = explode("=", $line);

@@ -7,6 +7,8 @@ class User
     private string $first_name;
     private string $last_name;
     private int $age;
+    private string $username = "";
+    private string $password = "";
 
 
     public function getId(): int
@@ -47,6 +49,26 @@ class User
     public function setAge(int $age): void
     {
         $this->age = $age;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     public function toDto(): UserDto
