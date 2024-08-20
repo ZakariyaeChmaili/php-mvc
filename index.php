@@ -1,10 +1,10 @@
 <?php
 
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/projects/UsersDemoApp/core/core.php";
 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projects/UsersDemoApp/App/core/core.php";
 
-loadControllers(P_ROOT . "/controllers");
+loadControllers();
 
 Router::routeToController($_GET["url"], RequestMethod::valueOf($_SERVER['REQUEST_METHOD']));
 
