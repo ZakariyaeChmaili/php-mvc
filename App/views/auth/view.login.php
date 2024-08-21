@@ -1,4 +1,4 @@
-<?php $this->start("body");?>
+<?php View::start("body");?>
 
 <div class="row justify-content-center align-items-center h-100">
     <div class="col col-4">
@@ -29,4 +29,4 @@
     </div>
 </div>
 
-<?php $this->end("body");?>
+<?php View::end("body");?>

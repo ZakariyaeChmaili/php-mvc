@@ -16,23 +16,21 @@ class AuthController
     #[Route("/auth/login", RequestMethod::GET)]
     public function login()
     {
-        View::view("auth/view.login");
+        View::view(viewName: "auth/view.login",template: "authTemplate");
     }
 
     #[Route("/auth/register", RequestMethod::GET)]
     public function register()
     {
-
-
-        View::view("auth/view.register");
+        View::view(viewName: "auth/view.register",template: "authTemplate");
     }
 
-    #[Route("/auth/signUp", RequestMethod::POST)]
+    #[Route("/auth/register", RequestMethod::POST)]
     public function signUp()
     {
-
-
-        View::view("auth/view.register");
+        $post = View::getPostData();
+        $this->authService->register(username: $post["username"], password: $post["password"]);
+        View::redirect("/auth/register");
     }
 
     #[Route("/auth/signIn", RequestMethod::POST)]

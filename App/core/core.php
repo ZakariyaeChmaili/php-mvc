@@ -7,11 +7,12 @@ function dd($data)
     die();
 
 }
+
 define("P_ROOT", substr(__DIR__, 0, -9));
 const ROOT_URL = "/projects/UsersDemoApp/";
 spl_autoload_register(function ($class_name) {
     $directoryIterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator(P_ROOT."/App/")
+        new RecursiveDirectoryIterator(P_ROOT . "/App/")
 
     );
 
@@ -41,7 +42,8 @@ function loadControllers(): void
                         $attributes = $method->getAttributes(Route::class);
                         foreach ($attributes as $attribute) {
                             $arguments = $attribute->getArguments();
-                            Router::addRoute($arguments[1], $arguments[0], $controller, $method->getName());
+                            $url = str_starts_with($arguments[0], "/") ? substr($arguments[0], 1) : $arguments[0];
+                            Router::addRoute(requestMethod: $arguments[1], url: $url,controllerName:  $controller,methodName:  $method->getName());
                         }
                     }
                 }

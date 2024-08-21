@@ -27,7 +27,7 @@ class UserController
         View::view("formUser");
     }
 
-    #[Route("user/updateFormUser/:id", RequestMethod::GET)]
+    #[Route("user/updateFormUser/:name/:id", RequestMethod::GET)]
     public function updateFormUser(string $id)
     {
         $userToUpdate = $this->userService->getUser($id);

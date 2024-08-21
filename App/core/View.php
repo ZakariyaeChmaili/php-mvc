@@ -10,11 +10,11 @@ class View
     }
 
 
-    public static function view(string $viewName, $data = null): void
+    public static function view(string $viewName, $data = null, string $template = "template"): void
     {
 
         include P_ROOT . "/App/views/" . $viewName . ".php";
-        include P_ROOT . "/App/template/template.php";
+        include P_ROOT . "/App/template/$template.php";
     }
 
     public static function redirect(string $view): void

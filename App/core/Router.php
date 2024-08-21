@@ -6,23 +6,22 @@ class Router
 
     public static array $urls = array();
 
-    public static function addRoute(RequestMethod $requestMethod, string $url, string $controllerName, string $methodName)
+    public static function addRoute(RequestMethod $requestMethod, string $url, string $controllerName, string $methodName): void
     {
-
         $params = self::extractUrlParamsKeyAndIndexAndUpdateUrl($url);
 
-        self::$urls[$url] = [
-            "controller" => $controllerName,
-            "action" => $methodName,
-            "requestMethod" => $requestMethod
+        self::$urls[RequestMethod::toString($requestMethod)][] = [
+            'controller' => $controllerName,
+            'action' => $methodName,
+            'endpoint' => $url
         ];
 
         if ($params) {
+            $lastEndPointIndex = sizeof(self::$urls[RequestMethod::toString($requestMethod)]) - 1;
             foreach ($params as $paramIndex => $paramKey) {
-                self::$urls[$url]["params"][$paramIndex] = $paramKey;
+                self::$urls[RequestMethod::toString($requestMethod)][$lastEndPointIndex]['params'][] = [$paramIndex => $paramKey];
 
             }
-
         }
 
     }
@@ -47,13 +46,12 @@ class Router
     public static function routeToController(string $url, RequestMethod $requestMethod): void
     {
         $urlToCompare = $url;
-        foreach (self::$urls as $savedUrl => $data) {
-
-            $params = self::extractUrlParamsValueAndUpdateUrl($urlToCompare, [$savedUrl, $data]);
-            if (self::compareUrls($urlToCompare, $savedUrl) and $requestMethod === $data['requestMethod']) {
-                $controller = $data["controller"];
+        foreach (self::$urls[RequestMethod::toString($requestMethod)] as $savedUrl) {
+            $params = self::extractUrlParamsValueAndUpdateUrl(urlToCompare: $urlToCompare, url: $savedUrl['endpoint'], paramsList: $savedUrl['params'] ?? null);
+            if (self::compareUrls($urlToCompare, $savedUrl['endpoint'])) {
+                $controller = $savedUrl["controller"];
                 $controllerObj = new $controller();
-                $method = $data['action'];
+                $method = $savedUrl['action'];
                 call_user_func_array([$controllerObj, $method], $params);
                 exit();
             }
@@ -71,21 +69,23 @@ class Router
         return false;
     }
 
-    private static function extractUrlParamsValueAndUpdateUrl(string &$urlToCompare, array $savedUrl): array
+    private static function extractUrlParamsValueAndUpdateUrl(string &$urlToCompare, string $url, array|null $paramsList): array
     {
 
-        $params = [];
-        if (isset($savedUrl[1]['params'])) {
-            if (str_starts_with($urlToCompare, $savedUrl[0])) {
+        $parameters = [];
+        if ($paramsList) {
+            if (str_starts_with($urlToCompare, $url) or str_starts_with("/" . $urlToCompare, $url)) {
                 $urlToCompareList = explode("/", $urlToCompare);
-                foreach ($savedUrl[1]['params'] as $paramIndex => $paramKey) {
-                    if (!isset($urlToCompareList[$paramIndex])) {
-                        self::httpResponseAbort(401);
-                    }
-                    $paramValue = $urlToCompareList[$paramIndex];
+                foreach ($paramsList as $index => $params) {
+                    foreach ($params as $paramIndex => $paramKey) {
+                        if (!isset($urlToCompareList[$paramIndex])) {
+                            self::httpResponseAbort(401);
+                        }
+                        $paramValue = $urlToCompareList[$paramIndex];
 
-                    $params[] = $paramValue;
-                    unset($urlToCompareList[$paramIndex]);
+                        $parameters[] = $paramValue;
+                        unset($urlToCompareList[$paramIndex]);
+                    }
                 }
 
                 $urlToCompare = implode("/", $urlToCompareList);
@@ -93,7 +93,7 @@ class Router
             }
         }
 
-        return $params;
+        return $parameters;
     }
 
 

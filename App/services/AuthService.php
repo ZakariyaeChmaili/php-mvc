@@ -16,4 +16,13 @@ class AuthService
 
     }
 
+    public function register(string $username,#[SensitiveParameter] string $password){
+        $hashedPassword = password_hash($password,PASSWORD_BCRYPT );
+        $user = new User();
+        $user->setUsername($username);
+        $user->setPassword($hashedPassword);
+        $this->userRepository->saveUser($user);
+
+    }
+
 }

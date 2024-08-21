@@ -7,18 +7,24 @@ enum RequestMethod
     case PUT;
     case DELETE;
 
+
+    public static function toString(RequestMethod $requestMethod): string
+    {
+        return match ($requestMethod) {
+            RequestMethod::POST => "POST",
+            RequestMethod::PUT => "PUT",
+            RequestMethod::DELETE => "DELETE",
+            default => "GET",
+        };
+    }
     public static function valueOf(string $requestMethod): RequestMethod
     {
-        switch ($requestMethod) {
-            case "POST":
-                return RequestMethod::POST;
-            case "PUT":
-                return RequestMethod::PUT;
-            case "DELETE":
-                return RequestMethod::DELETE;
-            default:
-                return RequestMethod::GET;
-        }
+        return match ($requestMethod) {
+            "POST" => RequestMethod::POST,
+            "PUT" => RequestMethod::PUT,
+            "DELETE" => RequestMethod::DELETE,
+            default => RequestMethod::GET,
+        };
 
     }
 

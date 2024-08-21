@@ -29,6 +29,7 @@ View::includeView("nav") ?>
                     <th scope="col">first name</th>
                     <th scope="col">last name</th>
                     <th scope="col">age</th>
+                    <th scope="col">username</th>
                     <th scope="col">action</th>
                 </tr>
                 </thead>
@@ -39,6 +40,7 @@ View::includeView("nav") ?>
                         <td><?=$user->getFirstName()?></td>
                         <td><?=$user->getLastName()?></td>
                         <td><?=$user->getAge()?></td>
+                        <td><?=$user->getUsername()?></td>
                         <td>
                             <div class="row">
                                 <div class="col col-auto">

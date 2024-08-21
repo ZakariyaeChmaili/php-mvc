@@ -4,9 +4,7 @@ require_once "App/core/core.php";
 function extractTablesFromEntities(): array
 {
     $tables = [];
-    var_dump(P_ROOT);
     $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(P_ROOT."/App/", RecursiveIteratorIterator::LEAVES_ONLY));
-    var_dump($iterator);
     foreach ($iterator as $file) {
         if (str_ends_with($file->getFilename(), ".php")) {
             $fileName = str_replace(".php", "", $file->getFilename());
