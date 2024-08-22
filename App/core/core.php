@@ -39,11 +39,11 @@ function loadControllers(): void
                     $controller = $fileName;
                     $methods = $refection->getMethods();
                     foreach ($methods as $method) {
-                        $attributes = $method->getAttributes(Route::class);
+                        $attributes = $method->getAttributes(Route::class,ReflectionAttribute::IS_INSTANCEOF);
                         foreach ($attributes as $attribute) {
                             $arguments = $attribute->getArguments();
                             $url = str_starts_with($arguments[0], "/") ? substr($arguments[0], 1) : $arguments[0];
-                            Router::addRoute(requestMethod: $arguments[1], url: $url,controllerName:  $controller,methodName:  $method->getName());
+                            Router::addRoute(requestMethod: RequestMethod::valueOf(strtoupper($attribute->getName())), url: $url, controllerName: $controller, methodName: $method->getName());
                         }
                     }
                 }

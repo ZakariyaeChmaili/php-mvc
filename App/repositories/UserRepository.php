@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 class UserRepository extends Repository
 {
 
@@ -18,7 +16,7 @@ class UserRepository extends Repository
         return $this->fetch("User", $sql);
     }
 
-    public function getUser(int $id): array
+    public function getUserById(int $id): array
     {
         $sql = "SELECT * FROM users where id = :id";
         $params = ["id" => $id];
@@ -27,11 +25,13 @@ class UserRepository extends Repository
 
     public function saveUser(User $user): bool
     {
-        $sql = "INSERT INTO users (first_name, last_name, age) VALUES (:firstName, :lastName, :age)";
+        $sql = "INSERT INTO users (first_name, last_name, age, username, password) VALUES (:firstName, :lastName, :age, :username, :password)";
         $params = [
             "firstName" => $user->getFirstName(),
             "lastName" => $user->getLastName(),
-            "age" => $user->getAge()
+            "age" => $user->getAge(),
+            "username" => $user->getUsername(),
+            "password" => $user->getPassword()
         ];
         return $this->query("User", $sql, $params);
     }
@@ -57,11 +57,13 @@ class UserRepository extends Repository
         return $this->query("User", $sql, $params);
     }
 
-
-//    public function getUserByUsernameAndPassword(string $username, string $password): User{
-//
-//        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
-//        password_hash()
-//    }
+    public function getUserByUsername(string $username): false|array
+    {
+        $sql = "SELECT * FROM users where username = :username ;";
+        $params = [
+            "username" => $username,
+        ];
+        return $this->fetch("User", $sql, $params);
+    }
 
 }

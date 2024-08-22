@@ -24,7 +24,7 @@ class UserService
     {
         return array_map(function (User $user) {
             return $user->toDto();
-        }, $this->userRepo->getUser($id))[0];
+        }, $this->userRepo->getUserById($id))[0];
     }
 
 

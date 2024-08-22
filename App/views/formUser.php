@@ -8,28 +8,28 @@ View::includeView("nav") ?>
         <div class="container">
             <div class="card">
                 <form method="post" action="<?php
-                if (isset($data['userToUpdate']) ?? $data['userToUpdate']->getId())
+                if (isset($userToUpdate) ?? $userToUpdate->getId())
                     echo ROOT_URL . "user/update";
                 else echo ROOT_URL . "user/save";
 
                 ?>">
                     <div class="card-body">
-                        <input type="text" value="<?= isset($data['userToUpdate']) ? $data['userToUpdate']->getId() : ''  ?>" hidden name="id"
+                        <input type="text" value="<?= isset($userToUpdate) ? $userToUpdate->getId() : ''  ?>" hidden name="id"
                                class="form-control" id="id">
 
                         <div class="mb-3">
                             <label for="firstName" class="form-label">first name</label>
-                            <input required type="text" value="<?= isset($data['userToUpdate']) ? $data['userToUpdate']->getFirstName() : ''  ?>"
+                            <input required type="text" value="<?= isset($userToUpdate) ? $userToUpdate->getFirstName() : ''  ?>"
                                    name="firstName" class="form-control" id="firstName">
                         </div>
                         <div class="mb-3">
                             <label for="lastName" class="form-label">last name</label>
-                            <input required type="text" value="<?= isset($data['userToUpdate']) ? $data['userToUpdate']->getLastName() : ''  ?>" name="lastName"
+                            <input required type="text" value="<?= isset($userToUpdate) ? $userToUpdate->getLastName() : ''  ?>" name="lastName"
                                    class="form-control" id="lastName">
                         </div>
                         <div class="col-2 mb-3">
                             <label for="age" class="form-label">age</label>
-                            <input required type="number" value="<?= isset($data['userToUpdate']) ? $data['userToUpdate']->getAge() : ''  ?>" name="age"
+                            <input required type="number" value="<?= isset($userToUpdate) ? $userToUpdate->getAge() : ''  ?>" name="age"
                                    class="form-control" id="age">
                         </div>
                     </div>

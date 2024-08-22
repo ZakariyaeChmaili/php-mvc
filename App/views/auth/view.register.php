@@ -19,8 +19,9 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end gap-4">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+
+                        <a href="<?=ROOT_URL . "auth/login"?>"  class="btn btn-secondary"  >Log-in</a>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
             </div>

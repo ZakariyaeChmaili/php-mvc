@@ -12,7 +12,7 @@ class View
 
     public static function view(string $viewName, $data = null, string $template = "template"): void
     {
-
+        $data && extract($data);
         include P_ROOT . "/App/views/" . $viewName . ".php";
         include P_ROOT . "/App/template/$template.php";
     }

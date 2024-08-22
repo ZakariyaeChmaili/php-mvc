@@ -34,7 +34,7 @@ View::includeView("nav") ?>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach($data["users"] as $user) { ?>
+                <?php foreach($users as $user) { ?>
                     <tr>
                         <td><?=$user->getId()?></td>
                         <td><?=$user->getFirstName()?></td>

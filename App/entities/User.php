@@ -6,13 +6,13 @@ class User
 {
     #[Id]
     #[Column("id", ColumnTypes::INT)]
-    private int $id;
+    private int $id=0;
     #[Column("first_name", ColumnTypes::STRING)]
-    private string $first_name;
+    private string $first_name="";
     #[Column("last_name", ColumnTypes::STRING)]
-    private string $last_name;
+    private string $last_name="";
     #[Column("age", ColumnTypes::INT)]
-    private int $age;
+    private int $age=0;
     #[Column("username", ColumnTypes::STRING)]
     private string $username = "";
     #[Column("password", ColumnTypes::STRING)]
@@ -86,6 +86,7 @@ class User
         $userDto->setFirstName($this->first_name);
         $userDto->setLastName($this->last_name);
         $userDto->setAge($this->age);
+        $userDto->setUsername($this->username);
         return $userDto;
 
     }

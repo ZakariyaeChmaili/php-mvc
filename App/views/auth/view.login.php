@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="h2">Sign-in</div>
                 </div>
-                <form method="post" action="<?=ROOT_URL . "auth/authenticate"?>">
+                <form method="post" action="<?=ROOT_URL . "auth/login"?>">
                     <div class="card-body">
 
                         <div class="mb-3">
@@ -20,8 +20,8 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end gap-4">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a href="<?=ROOT_URL . "auth/register"?>"  class="btn btn-secondary" >Register Account</a>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
             </div>

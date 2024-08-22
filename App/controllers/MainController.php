@@ -10,7 +10,7 @@ class MainController
     {
     }
 
-    #[Route("/home", RequestMethod::GET)]
+    #[Get("/home")]
     function index()
     {
         View::view("home");

@@ -2,14 +2,14 @@
 
 
 
-use entities\User;
 
 class UserDto
 {
-    private int $id;
-    private string $firstName;
-    private string $lastName;
-    private int $age;
+    private int $id=0;
+    private string $firstName="";
+    private string $lastName="";
+    private int $age=0;
+    private string $username="";
 
 
     public function getId(): int
@@ -52,6 +52,16 @@ class UserDto
         $this->age = $age;
     }
 
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
 
     public function toEntity(): User
     {
@@ -60,6 +70,7 @@ class UserDto
         $user->setFirstName($this->firstName);
         $user->setLastName($this->lastName);
         $user->setAge($this->age);
+        $user->setUsername($this->username);
         return $user;
 
     }

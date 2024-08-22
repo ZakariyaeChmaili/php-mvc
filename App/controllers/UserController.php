@@ -13,7 +13,7 @@ class UserController
         $this->userService = new UserService();
     }
 
-    #[Route("/user", RequestMethod::GET)]
+    #[Get("/user")]
     public function index()
     {
 
@@ -21,20 +21,20 @@ class UserController
         View::view("users", ['users' => $users]);
     }
 
-    #[Route("/user/addFormUser", RequestMethod::GET)]
+    #[Get("/user/addFormUser")]
     public function addFormUser()
     {
         View::view("formUser");
     }
 
-    #[Route("user/updateFormUser/:name/:id", RequestMethod::GET)]
+    #[Get("user/updateFormUser/:id")]
     public function updateFormUser(string $id)
     {
         $userToUpdate = $this->userService->getUser($id);
         View::view("formUser", ['userToUpdate' => $userToUpdate]);
     }
 
-    #[Route("user/save", RequestMethod::POST)]
+    #[Post("user/save")]
     public function save()
     {
         $post = View::getPostData();
@@ -48,7 +48,7 @@ class UserController
 
     }
 
-    #[Route("user/update", RequestMethod::POST)]
+    #[Post("user/update")]
     public function update()
     {
         $post = View::getPostData();
@@ -63,7 +63,7 @@ class UserController
 
     }
 
-    #[Route("user/delete/:id", RequestMethod::GET)]
+    #[Get("user/delete/:id")]
     public function delete(string $id): void
     {
         $this->userService->deleteUser($id);
